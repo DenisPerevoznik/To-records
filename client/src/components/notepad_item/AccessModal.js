@@ -138,7 +138,7 @@ export const AccessModal = ({notepad}) => {
     return (
         <>
         
-        <a style={{color: "#009688", margin: "5px"}} onClick={() => {setModalOpen(true)}} title="Access" href="#"><i className="fas fa-users"></i></a>
+        <a style={{color: "#009688", margin: "5px"}} onClick={() => {setModalOpen(true)}} title="Access"><i className="fas fa-users"></i></a>
             <MDBModal isOpen={modalOpen} toggle={closeModal} centered position="top">
                 <MDBModalHeader toggle={closeModal}>Access control ({notepad.name})</MDBModalHeader>
                 <MDBModalBody>

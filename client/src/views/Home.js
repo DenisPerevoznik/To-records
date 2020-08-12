@@ -46,7 +46,7 @@ export const Home = () => {
 
         </div>}
 
-      <div className="row">
+      <div className="row pb-4">
 
         
         {!loader && <CreateNotepad updateElementsMethod={getNotepads}/>}

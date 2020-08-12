@@ -5,6 +5,7 @@ const router = Router();
 const {check, validationResult} = require('express-validator');
 const auth = require('../middleware/auth.middleware');
 const config = require('config');
+const smile = require('../custom_modules/SmileGenerator');
 
 router.post('/save-record', [ 
     check("record.title", "The maximum title length is no more than 17 characters").isLength({max: 17, min: 1}),
@@ -47,7 +48,7 @@ router.post('/create-record', auth, async (req, res) => {
         notepad.records.push(newRecord);
         
         await notepad.save();
-        res.status(200).json({record: newRecord, message: "Record created succesfully"});
+        res.status(200).json({record: newRecord, message: `${smile.generate('good')} Record created succesfully`});
 
     } catch (error) {
 

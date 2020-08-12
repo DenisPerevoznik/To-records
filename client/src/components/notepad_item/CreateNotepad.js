@@ -48,8 +48,8 @@ export const CreateNotepad = ({updateElementsMethod}) => {
 
     return (
     <MDBContainer>
-        <MDBBtn gradient="aqua" onClick={() => {setModalOpen(!modalOpen)}}>
-            <i className="fa fa-plus"/> Create notepad</MDBBtn>
+        <button className="btn btn-success" onClick={() => {setModalOpen(true)}}>
+            <i className="fas fa-plus-circle"/> Create notepad</button>
         <MDBModal isOpen={modalOpen} toggle={() => {setModalOpen(!modalOpen)}} centered>
           <MDBModalHeader toggle={() => {setModalOpen(!modalOpen)}}>Create new notepad</MDBModalHeader>
           <MDBModalBody>

@@ -131,9 +131,9 @@ export const NotepadItem = (props) => {
                         <Link to={`/home/notepad/${notepadItem._id}`} className="btn btn-indigo"
                             style={{color: "white"}}>Open</Link>
                         {!noEdit && <div style={{fontSize: "20px"}}>
-                            <a style={{color: "#2196f3", margin: "5px"}} onClick={() => {setIsEdit(true)}} title="Edit" href="#"><i data-id={notepadItem._id} className="far fa-edit"></i></a>
+                            <a style={{color: "#2196f3", margin: "5px"}} onClick={() => {setIsEdit(true)}} title="Edit"><i data-id={notepadItem._id} className="far fa-edit"></i></a>
                             <AccessModal notepad={notepadItem}/>
-                            <a style={{color: "#ff4444", margin: "5px"}} title="Remove" onClick={deleteHandler} href="#"><i data-name={notepadItem.name} data-id={notepadItem._id} className="far fa-trash-alt"></i></a>
+                            <a style={{color: "#ff4444", margin: "5px"}} title="Remove" onClick={deleteHandler}><i data-name={notepadItem.name} data-id={notepadItem._id} className="far fa-trash-alt"></i></a>
                         </div>}
                     </div>}
 

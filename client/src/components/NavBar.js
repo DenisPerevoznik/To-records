@@ -28,7 +28,7 @@ const navToggleHandler = () => {
         
         <MDBNavbar color="light-blue darken-1" dark expand="md" style={{ marginTop: "20px" }}>
             <MDBNavbarBrand>
-            <strong className="white-text">To Links</strong>
+            <strong className="white-text">ToRec</strong>
             </MDBNavbarBrand>
             <MDBNavbarToggler onClick={navToggleHandler} />
             <MDBCollapse id="navbarCollapse3" isOpen={navToggle} navbar>
@@ -44,8 +44,10 @@ const navToggleHandler = () => {
             </MDBNavbarNav>
             <MDBNavbarNav right>
                 <MDBNavItem>
-                <MDBNavLink className="waves-effect waves-light d-flex align-items-center" to="#!">1
-                    <MDBIcon icon="envelope" className="ml-1" />
+                <MDBNavLink className="waves-effect waves-light d-flex align-items-center" to="#!">
+                    <MDBIcon icon="search" className="ml-1" />
+                    <input className="form-control form-control-sm ml-3 w-100" 
+                                    type="text" placeholder="Search" aria-label="Search" />
                 </MDBNavLink>
                 </MDBNavItem>
                 <MDBNavItem>

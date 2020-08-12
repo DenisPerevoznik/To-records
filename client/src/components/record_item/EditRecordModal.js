@@ -50,18 +50,13 @@ export const EditRecordModal = ({record, onSave, onCancel, modalState}) => {
 
     return (
         <>
-
-            {/* <MDBBtn color="primary" onClick={() => {setModalOpen(true)}} style={btnEdit} title="Edit"><i className="fas fa-pencil-alt"/></MDBBtn> */}
-
             <MDBModal isOpen={modalState} centered>
                 <MDBModalHeader style={{color: record.color}}>
-                    {/* <input onChange={changeTitleHandler} className="form-control" 
-                        type="text" placeholder="Record title" value={recordData.title}/> */}
                         {record.title}
                         </MDBModalHeader>
                 <MDBModalBody>
 
-                <SunEditor lang="ru" height="100" setOptions={{...params, size: "270"}} 
+                <SunEditor lang="ru" height="300" setOptions={{...params, size: "270"}} 
                     onChange={changeHandler} setContents={record.description}/>
 
 
@@ -74,12 +69,3 @@ export const EditRecordModal = ({record, onSave, onCancel, modalState}) => {
         </>
     );
 }
-
-// const btnEdit = {
-//     marginTop: "-35px",
-//     borderRadius: "50%",
-//     borderColor: "white",
-//     paddingLeft: "10px",
-//     paddingRight: "10px",
-//     position: "absolute"
-// }

@@ -31,6 +31,10 @@
     border-collapse: collapse;
 }
 
+.record-content figure{
+    padding-bottom: 0 !important;
+}
+
 
 .settings-block {
     display: none;

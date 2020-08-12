@@ -125,13 +125,6 @@ export const RecordItem = ({record, notepadId, onRemoveRecord}) => {
                 </MDBCardHeader>
                 <MDBCardBody className="scrollbar scrollbar-primary record-content">
                     
-                    <div className="d-flex justify-content-center">
-                        <EditRecordModal record={recordData} modalState={modalEditState}
-                            onSave={saveEditedContent} onCancel={() => {setModalEditState(false)}}/>
-                        
-                    </div>
-                    
-                    
                     {showSettings ? <SettingsBlock onChangeNameClick={changeNameClickHandler}
                         showSettingsToggle={showSettings} onChangeSize={changeSizeHandler}/> : renderHTML(recordData.description)}
                         
@@ -158,6 +151,9 @@ export const RecordItem = ({record, notepadId, onRemoveRecord}) => {
                         </MDBBtnGroup>
                     </div>
                 </MDBCardFooter>
+
+                <EditRecordModal record={recordData} modalState={modalEditState}
+                            onSave={saveEditedContent} onCancel={() => {setModalEditState(false)}}/>
             </MDBCard>
         </div>
     )

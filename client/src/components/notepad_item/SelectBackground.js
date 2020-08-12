@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useToasts } from 'react-toast-notifications';
 import { useHttp } from '../../hooks/http.hook';
+import '../../resources/css/styles.css';
 
 export const SelectBackground = ({imageChange, isFullScreen = false, selectedImage = null}) => {
 
@@ -81,10 +82,10 @@ const Element = ({checked, img, selectElement}) => {
     const [hovered, setHovered] = useState(false);
 
     return (
-        <div onClick={selectElement} data-path={img} style={{...element, 
+        <div onClick={selectElement} data-path={img} style={{ 
         backgroundImage: `url(${require(`../../../resources/images/${img}`)})`, 
             opacity: hovered ? "0.7" : "1"}} onMouseEnter={() => {setHovered(true)}}
-            onMouseLeave={() => {setHovered(false)}} className="col-2">
+            onMouseLeave={() => {setHovered(false)}} className="col-2 selectImgBlock">
             {checked &&
             <div style={checkBackground} className="d-flex justify-content-center align-items-center">
                 <i className="fas fa-check"/>
@@ -99,16 +100,16 @@ const container = {
     overflowY: "auto"
 }
 
-const element = {
+// const element = {
 
-    height: "55px",
-    borderRadius: "0.25rem",
-    boxShadow: "2px 3px 8px -4px black",
-    margin: "10px",
-    backgroundPosition: "center center",
-    cursor: "pointer",
-    transition: "0.15s ease"
-}
+//     height: "55px",
+//     borderRadius: "0.25rem",
+//     boxShadow: "2px 3px 8px -4px black",
+//     margin: "10px",
+//     backgroundPosition: "center center",
+//     cursor: "pointer",
+//     transition: "0.15s ease"
+// }
 
 const checkBackground = {
     backgroundColor: "black",

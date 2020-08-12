@@ -72,7 +72,16 @@ export const NotepadViewing = (props) => {
     return (
         <div className="pb-4">
 
-            <div className="row d-flex justify-content-center pt-3">
+            <div className="row">
+
+                <div className="col-12" style={{color: "#53546a"}}>
+                    <h2><i className="fas fa-book"/> {notepad.name}</h2>
+                </div>
+                {/* <div className="col-12">
+                    <button className="btn btn-success"><i className="far fa-file-alt"/> New entry</button>
+                </div> */}
+            </div>
+            {/* <div className="row d-flex justify-content-center pt-3">
 
 
                 <div className="col-md-3">
@@ -106,7 +115,7 @@ export const NotepadViewing = (props) => {
                                     type="text" placeholder="Search" aria-label="Search" />
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className="row">
                 {loader &&

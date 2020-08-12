@@ -1,0 +1,12 @@
+
+.selectImgBlock {
+
+    height: 55px;
+    border-radius: 0.25rem;
+    box-shadow: 2px 3px 8px -4px black;
+    margin: 10px;
+    background-position: center center;
+    cursor: pointer;
+    transition: 0.15s ease;
+    background-size: contain;
+}
