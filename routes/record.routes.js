@@ -32,8 +32,8 @@ router.post('/save-record', [
         res.status(200).json({message: "Record saved successfully"});
 
     } catch (error) {
-        res.status(500).json({message: error.message});
-        // res.status(500).json({message: "😥 Oops... something went wrong, try again"});
+        // res.status(500).json({message: error.message});
+        res.status(500).json({message: "😥 Oops... something went wrong, try again"});
     }
 });
 

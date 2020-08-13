@@ -19,7 +19,7 @@ export const ChangeImageModal = ({changeImgMethod, currentImage}) => {
 
           </MDBModalBody>
           <MDBModalFooter>
-            <MDBBtn color="default" onClick={() => {setModalOpen(!modalOpen)}}>OK</MDBBtn>
+            <button className="btn btn-success" onClick={() => {setModalOpen(false)}}><i className="fas fa-check"/> Apply</button>
           </MDBModalFooter>
         </MDBModal>
       </MDBContainer>

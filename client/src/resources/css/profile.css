@@ -1,0 +1,30 @@
+
+.photo{
+    width: 160px;
+    height: 160px;
+    border: 1px solid gray;
+    border-radius: 50%;
+}
+
+.user-photo{
+    width: 160px;
+    height: 160px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    background-size: contain;
+}
+
+.btn-edit-block{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: blue;
+}
+
+.btn-change-photo{
+    border-radius: 50%;
+    font-size: 15px;
+    margin-top: 6.5rem;
+    margin-left: 8rem;
+    padding: 5px 9px;
+}

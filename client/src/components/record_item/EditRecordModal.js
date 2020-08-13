@@ -62,8 +62,9 @@ export const EditRecordModal = ({record, onSave, onCancel, modalState}) => {
 
                 </MDBModalBody>
                 <MDBModalFooter>
-                    <MDBBtn color="default" onClick={() => {onSave(content)}}>Save</MDBBtn>
-                    <MDBBtn color="dark" onClick={onCancel}>Cancel</MDBBtn>
+
+                    <button className="btn btn-danger" onClick={onCancel}><i className="fas fa-times"/> Cancel</button>
+                    <button className="btn btn-success" onClick={() => {onSave(content)}}><i className="fas fa-check"/> Save</button>
                 </MDBModalFooter>
             </MDBModal>
         </>

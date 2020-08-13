@@ -63,8 +63,8 @@ export const CreateNotepad = ({updateElementsMethod}) => {
 
           </MDBModalBody>
           <MDBModalFooter>
-            <MDBBtn color="dark" onClick={() => {setModalOpen(!modalOpen)}}>Cancel</MDBBtn>
-            <MDBBtn color="default" onClick={createHandler}>Create</MDBBtn>
+            <button className="btn btn-danger" onClick={() => {setModalOpen(false)}}><i className="fas fa-times"/> Cancel</button>
+            <button className="btn btn-success" onClick={createHandler}><i className="fas fa-check"/> Create</button>
           </MDBModalFooter>
         </MDBModal>
     </MDBContainer>

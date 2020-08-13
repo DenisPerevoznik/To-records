@@ -5,6 +5,7 @@ import {Register} from "./views/Register";
 import {Home} from './views/Home';
 import { NotepadViewing } from "./views/NotepadViewing";
 import { Available } from "./views/Available";
+import { Profile } from "./views/Profile";
 
 export const useRoutes = isAuthenticated => {
 
@@ -17,6 +18,10 @@ export const useRoutes = isAuthenticated => {
 
                 <Route path="/available">
                     <Available/>
+                </Route>
+
+                <Route path="/profile">
+                    <Profile/>
                 </Route>
 
                 <Route path="/home/notepad/:notepadId" component={NotepadViewing}/>

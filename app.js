@@ -11,6 +11,7 @@ app.use(express.json({extended: true}));
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/notepad', require('./routes/notepad.routes'));
 app.use('/api/notepad', require('./routes/record.routes'));
+app.use('/api/profile', require('./routes/profile.routes'));
 
 mongo.connect(config.get('mongoUri'));
 
