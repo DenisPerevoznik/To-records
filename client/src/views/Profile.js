@@ -12,6 +12,7 @@ export const Profile = () => {
   const [user, setUser] = useState();
   const [loader, setLoader] = useState(true);
   const [changeImgModalState, setChangeImgModalState] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const {request} = useHttp();
   const {addToast} = useToasts();
 
@@ -35,6 +36,26 @@ export const Profile = () => {
     }
   }
 
+  const saveProfileHandler = async () => {
+
+    try {
+        
+        const data = await request('/api/profile/save-profile', "POST", {user}, 
+            {Authorization: `Bearer ${auth.token}`});
+
+        addToast(data.message, {appearance: "success", autoDismiss: true});
+        setIsEdit(false);
+    } catch (error) {
+        
+        addToast(error.message, {appearance: "error"});
+    }
+  }
+
+  const changeHandler = (event) => {
+
+    setUser({...user, [event.target.name]: event.target.value});
+  }
+
     return (
     <div className="row p-5">
         {user ? <>
@@ -51,12 +72,35 @@ export const Profile = () => {
             </div>
         </div>  
         <div className="col-md-9">
-            <h3>{user.name}</h3>
-            <p>{user.description}</p>
+            
+            {!isEdit ? <div>
+                <h3>{user.name}</h3>
+                <p>{user.description}</p>
 
-            <h5>
-                <i className="far fa-building"/> {user.company}
-            </h5>
+                <h5>
+                    <i className="far fa-building"/> {user.company}
+                </h5>
+            </div> : 
+            
+            <div>
+                {/* Editable block */}
+
+                <input type="text" name="name" placeholder="Enter your name" className="form-control" 
+                    style={{margin: "10px"}} value={user.name} onChange={changeHandler}/>
+                
+                <textarea name="description" placeholder="About myself" className="form-control" 
+                    style={{margin: "10px"}} onChange={changeHandler}>{user.description}</textarea>
+
+                <input type="text" name="company" placeholder="Enter your company" className="form-control"
+                    style={{margin: "10px"}} value={user.company} onChange={changeHandler}/>
+            </div>
+            
+            }
+
+        </div>
+        <div className="col-12 d-flex justify-content-center">
+            {!isEdit ? <button className="btn btn-primary" onClick={() => {setIsEdit(true)}}><i className="fas fa-edit"/> Edit information</button>
+            : <button className="btn btn-success" onClick={saveProfileHandler}><i className="far fa-save"/> Save changes</button> }
         </div>
 
         <div className="col-12">

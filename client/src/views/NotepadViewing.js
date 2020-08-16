@@ -66,6 +66,7 @@ export const NotepadViewing = (props) => {
         } catch (error) {
             
             addToast(error.message, {appearance: "error", autoDismiss: true});
+            console.log("eerr: ", error.message);
         }
     }
 
@@ -137,7 +138,7 @@ export const NotepadViewing = (props) => {
                     <div className="blockNewRecord" title="Add new record" onClick={addNewRecord}>
                         <i className="far fa-plus-square"/>
                         <h4 className="mb-0">New record</h4>
-                        <p style={{fontSize: "15px"}}>(Ctrl + V)</p>
+                        {/* <p style={{fontSize: "15px"}}>(Ctrl + V)</p> */}
                     </div>
                 </div>
             </div>
@@ -145,25 +146,3 @@ export const NotepadViewing = (props) => {
         </div>
     );
 }
-
-
-
-
-// const overlap = {
-//     width: "100%",
-//     height: "100%",
-//     borderRadius: "7px",
-//     backgroundColor: "rgba(0, 0, 0, 0.24)",
-//     color: "white"
-// }
-
-// const sticky = {
-//     top: "0",
-//     position: "sticky"
-// }
-
-// const notepadImgMiniBanner = {
-//     width: "50px",
-//     height: "100%",
-//     backgroundColor: "blue"
-// }

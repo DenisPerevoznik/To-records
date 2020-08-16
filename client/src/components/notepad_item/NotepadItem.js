@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useHttp } from '../../hooks/http.hook';
 import { useToasts } from 'react-toast-notifications';
@@ -21,6 +21,26 @@ export const NotepadItem = (props) => {
         name: notepadItem.name,
         description: notepadItem.description
     });
+    const [owner, setOwner] = useState();
+
+    useEffect(() => {
+
+        if(!isEdit){
+         getOwner();   
+        }
+    }, []);
+
+    const getOwner = async () => {
+
+        try {
+            
+            const data = await request(`/api/profile/get-user/${notepadItem.owner}`, "GET", null, 
+                {Authorization: `Bearer ${auth.token}`});
+
+            setOwner(data.user);
+        } catch (error) {
+        }
+    }
 
     const deleteHandler = async (event) => {
 
@@ -130,10 +150,21 @@ export const NotepadItem = (props) => {
                         
                         <Link to={`/home/notepad/${notepadItem._id}`} className="btn btn-indigo"
                             style={{color: "white"}}>Open</Link>
-                        {!noEdit && <div style={{fontSize: "20px"}}>
+
+                        {!noEdit ? <div style={{fontSize: "20px"}}>
                             <a style={{color: "#2196f3", margin: "5px"}} onClick={() => {setIsEdit(true)}} title="Edit"><i data-id={notepadItem._id} className="far fa-edit"></i></a>
                             <AccessModal notepad={notepadItem}/>
                             <a style={{color: "#ff4444", margin: "5px"}} title="Remove" onClick={deleteHandler}><i data-name={notepadItem.name} data-id={notepadItem._id} className="far fa-trash-alt"></i></a>
+                        </div> : 
+                        
+                        <div class="chip">
+                            {!owner ? 
+                                <div className="spinner-border spinner-border-sm" 
+                                    style={{color: "#18d3ca"}} role="status">
+                                    <span className="sr-only">Loading</span>
+                                </div> :
+                        
+                                <><img src={require(`../../resources/user-photos/${owner.photo}`)} alt="Contact Person"/> <span title={owner.name}>{owner.name}</span></>}
                         </div>}
                     </div>}
 

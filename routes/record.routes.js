@@ -52,8 +52,8 @@ router.post('/create-record', auth, async (req, res) => {
 
     } catch (error) {
 
-        // res.status(500).json({message: error.message});
-        res.status(500).json({message: "😥 Oops... something went wrong, try again"});
+        res.status(500).json({message: error.message});
+        // res.status(500).json({message: "😥 Oops... something went wrong, try again"});
     }
 });
 
