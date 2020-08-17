@@ -13,7 +13,7 @@ app.use('/api/notepad', require('./routes/notepad.routes'));
 app.use('/api/notepad', require('./routes/record.routes'));
 app.use('/api/profile', require('./routes/profile.routes'));
 
-if(process.env.NODE_ENV === "production"){
+if(config.get("production")){
     app.use('/', express.static(path.join(__dirname, "client", "build")));
 
     app.get('*', (req, res) => {
