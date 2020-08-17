@@ -20,6 +20,13 @@ mongo.connect(config.get('mongoUri'));
     
 // });
 
+if(config.get("isProduction")){
+    app.use(express.static(path.join(__dirname, './client/build')))
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, './client/build'))
+    })
+}
+
 mongo.connection.on('error', (error) => {
 
     console.log(colors.red("=( Ошибка подключения к базе данных: "), error);
