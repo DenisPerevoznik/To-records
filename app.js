@@ -6,7 +6,7 @@ const colors = require("colors");
 const app = express();
 const PORT = config.get('port') || 5000;
 
-app.use(express.static(__dirname));
+app.use(express.static("uploads"));
 app.use(express.json({extended: true}));
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/notepad', require('./routes/notepad.routes'));

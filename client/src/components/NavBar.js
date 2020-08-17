@@ -14,8 +14,10 @@ const {request} = useHttp();
 const history = useHistory();
 
 useEffect(() => {
-    getUser();
-}, []);
+
+    if(auth.userId)
+        getUser();
+}, [auth]);
 
 const getUser = async () => {
 
@@ -69,8 +71,11 @@ const navToggleHandler = () => {
                 <MDBNavItem>
                 <MDBDropdown>
                     <MDBDropdownToggle className="dopdown-toggle" nav>
-                    <img src={require(`../resources/user-photos/${user ? user.photo : "default.jpg"}`)} className="rounded-circle z-depth-0"
-                        style={{ height: "35px", padding: 0 }} alt="" />
+                    {user ?
+                    <img src={`/${user.photo}`} className="rounded-circle z-depth-0"
+                        style={{ height: "35px", width: "35px" }} alt="" />
+                        :
+                    <i className="fas fa-user-circle" style={{fontSize: "30px"}}/>}
                     </MDBDropdownToggle>
                     <MDBDropdownMenu className="dropdown-default" right>
                     <MDBDropdownItem>

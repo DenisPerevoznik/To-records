@@ -11,7 +11,8 @@
     height: 160px;
     border: 1px solid gray;
     border-radius: 50%;
-    background-size: contain;
+    background-size: cover;
+    background-position: top;
 }
 
 .btn-edit-block{

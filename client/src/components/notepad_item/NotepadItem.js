@@ -164,7 +164,7 @@ export const NotepadItem = (props) => {
                                     <span className="sr-only">Loading</span>
                                 </div> :
                         
-                                <><img src={require(`../../resources/user-photos/${owner.photo}`)} alt="Contact Person"/> <span title={owner.name}>{owner.name}</span></>}
+                                <><img src={`/${owner.photo}`} alt="Contact Person"/> <span title={"Owner: " + owner.name}>{owner.name}</span></>}
                         </div>}
                     </div>}
 

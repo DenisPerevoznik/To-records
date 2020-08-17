@@ -5,6 +5,20 @@ const User = require("../models/User");
 const smile = require('../custom_modules/SmileGenerator');
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
+
+const fileFilter = (req, file, cb) => {
+  
+    if(file.mimetype === "image/png" || 
+    file.mimetype === "image/heic"|| 
+    file.mimetype === "image/jpg"|| 
+    file.mimetype === "image/jpeg"){
+        cb(null, true);
+    }
+    else{
+        cb(null, false);
+    }
+ }
 
 const upload = multer({storage: multer.diskStorage({
     destination(req, file, cb){
@@ -14,9 +28,9 @@ const upload = multer({storage: multer.diskStorage({
 
         const {userId} = req.body;
         const ext = path.extname(file.originalname);
-        cb(null, userId + ext);
+        cb(null, `${userId}-${Date.now()}${ext}`);
     }
-})});
+}), fileFilter});
 
 router.get('/get-user/:id', auth, async (req, res) => {
 
@@ -57,7 +71,22 @@ router.post('/upload-photo', [auth, upload.single('user-photo')], async (req, re
     const fileData = req.file;
 
     if(fileData){
-        return res.json({message: `${smile.generate("good")} Profile photo updated`});
+
+        const {userId} = req.body;
+        const user = await User.findById(userId);
+
+        if(user.photo != "default.jpg")
+            fs.unlink(`./uploads/${user.photo}`, (error) => {
+
+                if(error){
+                    console.log(`Error remove user photo: ${error}`.red);
+                }
+            });
+
+        user.photo = fileData.filename;
+        await user.save();
+
+        return res.json({userPhoto: user.photo, message: `${smile.generate("good")} Profile photo updated`});
     }
     
     res.status(400).json({message: `${smile.generate("bad")} Photo upload error`});

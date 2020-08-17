@@ -55,20 +55,21 @@ export const Profile = () => {
 
     setUser({...user, [event.target.name]: event.target.value});
   }
-
+ 
     return (
     <div className="row p-5">
         {user ? <>
         <div className="col-md-3 d-flex justify-content-center">
             <div>
                 
-                <div className="user-photo" style={{backgroundImage: `url(${require(`../resources/user-photos/${user ? user.photo : "default.jpg"}`)})`}}>
-                    
+                <div className="user-photo" style={{backgroundImage: `url(/${user.photo})`}}>
+                {/* ${require(`../resources/user-photos/${user ? user.photo : "default.jpg"}`)} */}
                     <button className="btn btn-primary btn-change-photo" onClick={() => {setChangeImgModalState(true)}} title="Change image">
                         <i className="fas fa-pencil-alt"/></button>
                 </div>
 
-                <ChangeImageModal modalState={changeImgModalState} onCancel={() => {setChangeImgModalState(false)}}/>
+                <ChangeImageModal modalState={changeImgModalState} onPhotoUploaded={photo => {setUser({...user, photo});}}
+                    closeModal={() => {setChangeImgModalState(false)}}/>
             </div>
         </div>  
         <div className="col-md-9">
@@ -106,7 +107,7 @@ export const Profile = () => {
         <div className="col-12">
             <hr/>
             <h4>Other parameters</h4>
-            </div>
+        </div>
             </> : 
             <div className="spinner-border text-primary" role="status">
                 <span className="sr-only">Saving...</span>
