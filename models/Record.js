@@ -7,6 +7,7 @@ const schema = new Schema({
     color: {type: String, default: "#ff7043"},
     isExecutable: {type: Boolean, required: false, default: false},
     isReady: {type: Boolean, required: false, default: false},
+    chosen: {type: Boolean, required: true, default: false},
     date: {type: String, required: true}
     // notepad: {type: Types.ObjectId, ref: "Notepad"}
 });

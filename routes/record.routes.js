@@ -64,8 +64,7 @@ router.delete('/remove-record/:notepadId/:recordId', auth, async (req, res) => {
         const recordId = req.params.id;
         const notepadId = req.params.notepadId;
 
-        const notepad = await Notepad.findOne({_id: notepadId});
-
+        const notepad = await Notepad.findById(notepadId);
         const removedRecordIndex = notepad.records.findIndex(record => record._id == recordId);
 
         notepad.records.splice(removedRecordIndex, 1);
@@ -77,5 +76,18 @@ router.delete('/remove-record/:notepadId/:recordId', auth, async (req, res) => {
         res.status(500).json({message: "😥 Oops... something went wrong, try again"});
     }
 });
+
+// router.post('/add-to-fav-rec', auth, async (req, res) => {
+
+//     const {chosen, recordId, notepadId} = req.body;
+
+//     const notepad = await Notepad.findById(notepadId);
+//     const index = notepad.records.findIndex(record => record._id == recordId);
+
+//     notepad.records[index].chosen = chosen;
+//     await notepad.save();
+
+//     res.json({message: `${smile.generate("good")} Entry marked as favorite`});
+// });
 
 module.exports = router;

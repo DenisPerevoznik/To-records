@@ -10,7 +10,7 @@ import '../../resources/css/scroll.css';
 import '../../resources/css/record-item.css';
 import { SettingsBlock } from "./SettingsBlock";
 
-export const RecordItem = ({record, notepadId, onRemoveRecord}) => {
+export const RecordItem = ({record, notepadId, onRemoveRecord, onModified}) => {
 
     const {request} = useHttp();
     const auth = useContext(AuthContext);
@@ -103,6 +103,20 @@ export const RecordItem = ({record, notepadId, onRemoveRecord}) => {
         setRecordData({...recordData, width: size});
     }
 
+    const chosenClick = async () => {
+
+        
+        if(!recordData.chosen){
+            addToast("🖤 Entry marked as favorite", {appearance: "success", autoDismiss: true});
+        }
+        else{
+            addToast("💔 Record removed from favorites", {appearance: "info", autoDismiss: true});
+        }
+        
+        setRecordData({...recordData, chosen: !recordData.chosen});
+        onModified(recordData);
+    }
+
     return (
         <div className={`col-md-${recordData.width}`}>
 
@@ -138,11 +152,17 @@ export const RecordItem = ({record, notepadId, onRemoveRecord}) => {
                             <MDBBtn color="white" title="Edit record" onClick={() => {setModalEditState(true)}}>
                                 <i className="fas fa-pencil-alt"/>
                             </MDBBtn>
+
                             <MDBBtn color="white" title="View">
                                 <i className="far fa-eye"/>
                             </MDBBtn>
+
                             <MDBBtn color="white" onClick={() => {setShowSettings(!showSettings)}} title="Settings">
                                 <i className="fas fa-cog"/>
+                            </MDBBtn>
+                            
+                            <MDBBtn color="white" onClick={chosenClick} title="Add to favorites">
+                                <i className={`${recordData.chosen ? "fas" : "far"} fa-heart`}/>
                             </MDBBtn>
 
                             <MDBBtn onClick={removeRecord} color="danger" title="Remove record">

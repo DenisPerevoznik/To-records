@@ -12,7 +12,7 @@ export const useRoutes = isAuthenticated => {
     if(isAuthenticated){
         return(
             <Switch>
-                <Route path="/home" exact>
+                <Route path="/notepads" exact>
                     <Home/>
                 </Route>
 
@@ -24,9 +24,9 @@ export const useRoutes = isAuthenticated => {
                     <Profile/>
                 </Route>
 
-                <Route path="/home/notepad/:notepadId" component={NotepadViewing}/>
+                <Route path="/notepads/notepad/:notepadId" component={NotepadViewing}/>
 
-                <Redirect to="/home"/>
+                <Redirect to="/notepads"/>
             </Switch>
         );
     }

@@ -13,23 +13,32 @@ export const NotepadViewing = (props) => {
     const {addToast} = useToasts();
     const [notepad, setNotepad] = useState({});
     const [records, setRecords] = useState([]);
-    const [searchRecords, setSearchRecords] = useState([]);
     const [loader, setLoader] = useState(true);
+    const [onlyFav, setOnlyFav] = useState(false);
 
     useEffect(() => {
 
         loadNotepadData();
     }, []);
 
+    useEffect(() => {
+
+        if(onlyFav)
+            setRecords(records.filter(rec => rec.chosen == onlyFav));
+        else
+            loadNotepadData();
+    }, [onlyFav]);
+
     const loadNotepadData = async () => {
         try {
+            setLoader(true);
             
             const notepad = await request(`/api/notepad/get/${params.notepadId}`, "GET", null, 
                 {Authorization: `Bearer ${auth.token}`});
             
             setNotepad(notepad);
             setRecords(notepad.records);
-            setSearchRecords(notepad.records);
+            setRecords(notepad.records);
             setLoader(false);
             
             
@@ -40,19 +49,19 @@ export const NotepadViewing = (props) => {
         }
     }
 
-    const searchHandler = (event) => {
+    // const searchHandler = (event) => {
 
-        const searchText = event.target.value;
-        setSearchRecords(records);
+    //     const searchText = event.target.value;
+    //     setSearchRecords(records);
         
         
-        if(searchText != ""){
-            setSearchRecords(records.filter(rec => {
-                const recTitle = rec.title.toLowerCase();
-                return recTitle.startsWith(searchText.toLowerCase());
-            }));
-        }
-    }
+    //     if(searchText != ""){
+    //         setSearchRecords(records.filter(rec => {
+    //             const recTitle = rec.title.toLowerCase();
+    //             return recTitle.startsWith(searchText.toLowerCase());
+    //         }));
+    //     }
+    // }
 
     const addNewRecord = async () => {
 
@@ -62,12 +71,19 @@ export const NotepadViewing = (props) => {
                 {Authorization: `Bearer ${auth.token}`});
 
             addToast(data.message, {appearance: "success", autoDismiss: true});
-            setSearchRecords([...searchRecords, data.record]);
+            setRecords([...records, data.record]);
         } catch (error) {
             
             addToast(error.message, {appearance: "error", autoDismiss: true});
-            console.log("eerr: ", error.message);
         }
+    }
+
+    const modifiedRecord = (modifiedrRecord) => {
+
+        const modIndex = records.findIndex(rec => rec._id == modifiedrRecord._id);
+        const temp = records;
+        temp[modIndex] = modifiedrRecord;
+        setRecords(temp);
     }
 
     return (
@@ -82,6 +98,14 @@ export const NotepadViewing = (props) => {
                     <button className="btn btn-success"><i className="far fa-file-alt"/> New entry</button>
                 </div> */}
             </div>
+
+            <div className="row">
+                <div className="col-md-3 col-sm-12">
+                    <button className="btn btn-dark" onClick={() => {setOnlyFav(!onlyFav)}}>
+                        {onlyFav && <i className="fas fa-check"/>} Only favorites</button>
+                </div>
+            </div>
+
             {/* <div className="row d-flex justify-content-center pt-3">
 
 
@@ -131,8 +155,8 @@ export const NotepadViewing = (props) => {
 
             
             <div className="row mt-4">
-                {searchRecords.map((rec, index) => <RecordItem key={rec._id} record={rec} notepadId={notepad._id}
-                    onRemoveRecord={records => {setSearchRecords(records)}}/>)}
+                {records.map((rec, index) => <RecordItem key={rec._id} record={rec} notepadId={notepad._id}
+                    onRemoveRecord={records => {setRecords(records)}} onModified={modifiedRecord}/>)}
 
                 <div className="col-sm-12 col-md-4 d-flex justify-content-center align-items-center">
                     <div className="blockNewRecord" title="Add new record" onClick={addNewRecord}>

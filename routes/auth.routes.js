@@ -10,8 +10,8 @@ const smiles = require('../custom_modules/SmileGenerator');
 // /api/auth/register
 router.post('/register', 
 [
-    check('email', `Некоректно введен email`).isEmail(),
-    check('password', `Минимальная длина пароля 5 символов`).isLength({min: 5})
+    check('email', `Incorrectly entered email`).isEmail(),
+    check('password', `The minimum length of a new password is 5 characters`).isLength({min: 5})
 ],
  async (req, res) => {
     try {
@@ -26,13 +26,13 @@ router.post('/register',
         const {name, email, password, repeatPassword} = req.body;
 
         if(password !== repeatPassword){
-            return res.status(400).json({message: `${smiles.generate("bad")} Пароли не совпадают!`});
+            return res.status(400).json({message: `${smiles.generate("bad")} Password mismatch!`});
         }
         
         const pasport = await User.findOne({email});
 
         if(pasport){
-            return res.status(409).json({message: "🧐 Такой пользователь уже существует"});
+            return res.status(409).json({message: "🧐 This user already exists"});
         }
 
         
@@ -41,12 +41,12 @@ router.post('/register',
         const newUser = new User({name, email, password: secretPass});
         await newUser.save();
         
-        res.status(201).json({message: `${smiles.generate("good")} Пользователь успешно создан!`});
+        res.status(201).json({message: `${smiles.generate("good")} User created successfully!`});
 
     } catch (error) {
         
         // res.status(500).json({message: error.message});
-        res.status(500).json({message: "😥 Что-то пошло не так. Попробуйте снова"});
+        res.status(500).json({message: "😥 Oops... something went wrong, try again"});
     }
 });
 
@@ -75,10 +75,10 @@ router.post('/login', async (req, res) => {
             }
         }
         
-        res.status(404).json({message: `${smiles.generate("bad")} Не верные данные для входа!`});
+        res.status(404).json({message: `${smiles.generate("bad")} Invalid login details!`});
 
     } catch (error) {
-        res.status(500).json({message: "😥 Что-то пошло не так. Попробуйте снова"});
+        res.status(500).json({message: "😥 Oops... something went wrong, try again"});
     }
 });
 

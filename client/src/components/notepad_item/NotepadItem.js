@@ -148,7 +148,7 @@ export const NotepadItem = (props) => {
                     {!isEdit && 
                     <div className="d-flex justify-content-between align-items-center">
                         
-                        <Link to={`/home/notepad/${notepadItem._id}`} className="btn btn-indigo"
+                        <Link to={`/notepads/notepad/${notepadItem._id}`} className="btn btn-indigo"
                             style={{color: "white"}}>Open</Link>
 
                         {!noEdit ? <div style={{fontSize: "20px"}}>

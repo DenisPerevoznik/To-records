@@ -61,7 +61,8 @@ export const ChangeImageModal = ({modalState = false, closeModal, onPhotoUploade
 
             <div className="d-flex flex-column">
                 <label>Select image:</label>
-                <input type="file" name="user-photo" onChange={changePhotoHandler}/>
+                <input type="file" name="user-photo" onChange={changePhotoHandler} 
+                    accept=".png, .jpg, .jpeg"/>
                 <MDBProgress value={progressLoaded} className="my-2" />
                 
             </div>

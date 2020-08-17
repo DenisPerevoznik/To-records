@@ -54,7 +54,7 @@ const navToggleHandler = () => {
             <MDBCollapse id="navbarCollapse3" isOpen={navToggle} navbar>
             <MDBNavbarNav left>
                 <MDBNavItem>
-                    <MDBNavLink to="/home">Home</MDBNavLink>
+                    <MDBNavLink to="/notepads">Notepads</MDBNavLink>
                 </MDBNavItem>
                 <MDBNavItem>
                     <MDBNavLink to="/available">Available to me</MDBNavLink>

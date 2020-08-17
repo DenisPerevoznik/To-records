@@ -6,11 +6,12 @@ const smile = require('../custom_modules/SmileGenerator');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const bcrypt = require('bcryptjs');
+const {check, validationResult} = require('express-validator');
 
 const fileFilter = (req, file, cb) => {
   
-    if(file.mimetype === "image/png" || 
-    file.mimetype === "image/heic"|| 
+    if(file.mimetype === "image/png" ||
     file.mimetype === "image/jpg"|| 
     file.mimetype === "image/jpeg"){
         cb(null, true);
@@ -90,6 +91,35 @@ router.post('/upload-photo', [auth, upload.single('user-photo')], async (req, re
     }
     
     res.status(400).json({message: `${smile.generate("bad")} Photo upload error`});
+});
+
+router.post('/change-password', [
+    auth,
+    check('newPass', `The minimum length of a new password is 5 characters`).isLength({min: 5})
+], async (req, res) => {
+
+    const errors = validationResult(req);
+
+        if(!errors.isEmpty()){
+            return res.status(400).json({
+                message: `${smile.generate("bad")} ${errors.array()[0].msg}`});
+        }
+
+    const {userId, currentPass, newPass} = req.body;
+    const user = await User.findById(userId);
+
+    const passMatch = await bcrypt.compare(currentPass, user.password);
+
+    if(!passMatch){
+
+        return res.status(400).json({message: `${smile.generate("bad")} The current password was entered incorrectly`});
+    }
+
+    const newSecretPass = await bcrypt.hash(newPass, 15);
+    user.password = newSecretPass;
+    await user.save();
+
+    res.json({message: `${smile.generate("good")} Password updated successfully`});
 });
 
 module.exports = router;
