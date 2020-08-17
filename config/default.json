@@ -1,6 +1,5 @@
 {
     "port": 5000,
-    "isProduction": true,
     "jwtSecretKey": "mern todo application my portfolio",
     "mongoUri": "mongodb+srv://perevoznik:mytodoqwerty@mytodo.nlv6o.mongodb.net/todo_db?retryWrites=true&w=majority",
     "imagesPath": "./client/resources/images",
