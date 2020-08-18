@@ -48,7 +48,7 @@ const navToggleHandler = () => {
         
         <MDBNavbar color="light-blue darken-1" dark expand="md" style={{ marginTop: "20px" }}>
             <MDBNavbarBrand>
-            <strong className="white-text"><i className="fas fa-redhat"/> To Records</strong>
+            <strong className="white-text"> T<i style={{fontSize: "18px"}} className="far fa-grin-wink"/> Records</strong>
             </MDBNavbarBrand>
             <MDBNavbarToggler onClick={navToggleHandler} />
             <MDBCollapse id="navbarCollapse3" isOpen={navToggle} navbar>
@@ -63,24 +63,29 @@ const navToggleHandler = () => {
             <MDBNavbarNav right>
                 <MDBNavItem>
                 <MDBNavLink className="waves-effect waves-light d-flex align-items-center" to="#!">
-                    <MDBIcon icon="search" className="ml-1" />
+                    {/* <MDBIcon icon="search" className="ml-1" />
                     <input className="form-control form-control-sm ml-3 w-100" 
-                                    type="text" placeholder="Search" aria-label="Search" />
+                                    type="text" placeholder="Search" aria-label="Search" /> */}
+
+                        <i className="fas fa-bell"/> 1
                 </MDBNavLink>
                 </MDBNavItem>
                 <MDBNavItem>
                 <MDBDropdown>
-                    <MDBDropdownToggle className="dopdown-toggle" nav>
+                    <MDBDropdownToggle className="dopdown-toggle" style={{padding: "0.3rem 1rem"}} nav>
                     {user ?
-                    <img src={`/${user.photo}`} className="rounded-circle z-depth-0"
-                        style={{ height: "35px", width: "35px" }} alt="" />
+                    // <img src={`/${user.photo}`} className="rounded-circle z-depth-0"
+                    //     style={{ height: "35px", width: "35px" }} alt="" />
+                    <div className="user-mini-photo" 
+                        style={{backgroundImage: `url(/${user.photo})`}}></div>
                         :
                     <i className="fas fa-user-circle" style={{fontSize: "30px"}}/>}
                     </MDBDropdownToggle>
-                    <MDBDropdownMenu className="dropdown-default" right>
-                    <MDBDropdownItem>
-                        <Link to="/profile">My account</Link></MDBDropdownItem>
-                    <MDBDropdownItem href="#!" onClick={logoutHandler}>Log out</MDBDropdownItem>
+                    <MDBDropdownMenu className="dropdown-default custom-drop-menu" right>
+
+                        <MDBDropdownItem><Link to="/profile"><i className="far fa-user-circle"/> My account</Link></MDBDropdownItem>
+                        <button className="dropdown-item" onClick={logoutHandler}><i className="fas fa-sign-out-alt"/> Log out</button>
+
                     </MDBDropdownMenu>
                 </MDBDropdown>
                 </MDBNavItem>

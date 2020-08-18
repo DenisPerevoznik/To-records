@@ -40,3 +40,17 @@
     margin: 0 8px 0 -12px;
     border-radius: 50%;
 }
+
+.custom-drop-menu button{
+
+    
+    padding: 10px;
+    font-weight: 400;
+}
+.custom-drop-menu a{
+
+    text-decoration: none;
+    padding: 0 !important;
+    font-weight: 400 !important;
+}
+
