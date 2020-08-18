@@ -4,7 +4,7 @@ const mongo = require('mongoose');
 const colors = require("colors");
 const path = require('path');
 const app = express();
-const PORT = config.get('port') || 5000;
+const PORT = process.env.NODE_ENV === "production" ? process.env.PORT : config.get('port');
 
 app.use(express.static("uploads"));
 app.use(express.json({extended: true}));
