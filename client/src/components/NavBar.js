@@ -48,7 +48,7 @@ const navToggleHandler = () => {
         
         <MDBNavbar color="light-blue darken-1" dark expand="md" style={{ marginTop: "20px" }}>
             <MDBNavbarBrand>
-            <strong className="white-text">To Records</strong>
+            <strong className="white-text"><i className="fas fa-redhat"/> To Records</strong>
             </MDBNavbarBrand>
             <MDBNavbarToggler onClick={navToggleHandler} />
             <MDBCollapse id="navbarCollapse3" isOpen={navToggle} navbar>
