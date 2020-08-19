@@ -89,14 +89,11 @@ export const NotepadViewing = (props) => {
     return (
         <div className="pb-4">
 
-            <div className="row">
+            <div className="row title-with-theme" style={{marginLeft: "1rem"}}>
 
                 <div className="col-12" style={{color: "#53546a"}}>
                     <h2><i className="fas fa-book"/> {notepad.name}</h2>
                 </div>
-                {/* <div className="col-12">
-                    <button className="btn btn-success"><i className="far fa-file-alt"/> New entry</button>
-                </div> */}
             </div>
 
             <div className="row">
@@ -159,7 +156,7 @@ export const NotepadViewing = (props) => {
                     onRemoveRecord={records => {setRecords(records)}} onModified={modifiedRecord}/>)}
 
                 <div className="col-sm-12 col-md-4 d-flex justify-content-center align-items-center">
-                    <div className="blockNewRecord" title="Add new record" onClick={addNewRecord}>
+                    <div className={`blockNewRecord`} title="Add new record" onClick={addNewRecord}>
                         <i className="far fa-plus-square"/>
                         <h4 className="mb-0">New record</h4>
                         {/* <p style={{fontSize: "15px"}}>(Ctrl + V)</p> */}

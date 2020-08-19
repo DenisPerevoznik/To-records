@@ -13,7 +13,12 @@ body{
     background-position: center center;
     cursor: pointer;
     transition: 0.15s ease;
-    background-size: contain;
+    background-size: cover;
+}
+
+.badge-header{
+    background-color: white;
+    color: black !important;
 }
 
 .chip{

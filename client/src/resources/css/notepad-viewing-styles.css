@@ -77,14 +77,24 @@ blockquote{
     width: 70%;
     min-height: 14rem;
     border-radius: 5px;
-    color: gray;
+    /* color: gray; */
     font-size: 55px;
     cursor: pointer;
     transition: 0.4s ease;
     border: 2px dotted gray;
+
+    background-color: #ffffffd9;
+    color: #454545;
 }
 
 .blockNewRecord:hover{
     background-color: white;
     font-size: 60px;
+}
+
+
+.title-with-theme{
+    background-color: #ffffffeb;
+    width: fit-content;
+    border-radius: 5px 0;
 }

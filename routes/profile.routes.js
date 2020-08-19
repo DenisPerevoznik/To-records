@@ -47,14 +47,29 @@ router.get('/get-user/:id', auth, async (req, res) => {
     }
 });
 
-router.post('/save-profile', auth, async (req, res) => {
+router.post('/save-profile', 
+[
+    check("user.name", 'The "Name" field is required').not().isEmpty(),
+    auth
+],
+ async (req, res) => {
 
     try {
         
+        const errors = validationResult(req);
+
+        if(!errors.isEmpty()){
+            return res.status(400).json({message: `${smile.generate("bad")} ${errors.array()[0].msg}`});
+        }
+
         const reqUser = req.body.user;
         const user = await User.findById(reqUser._id);
         
         for (const key in reqUser) {
+
+            if(key == "_id" || key == "password")
+                break;
+
             user[key] = reqUser[key];
         }
 

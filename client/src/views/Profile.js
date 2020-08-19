@@ -46,7 +46,7 @@ export const Profile = () => {
         setIsEdit(false);
     } catch (error) {
         
-        addToast(error.message, {appearance: "error"});
+        addToast(error.message, {appearance: "error", autoDismiss: true});
     }
   }
 
@@ -101,7 +101,7 @@ export const Profile = () => {
                 <p>{user.description}</p>
 
                 <h5>
-                    <i className="far fa-building"/> {user.company}
+                    {user.company ? (user.company != "" && <><i className="far fa-building"/> {user.company}</>) : <></>}
                 </h5>
             </div> : 
             

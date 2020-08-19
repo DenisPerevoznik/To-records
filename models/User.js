@@ -8,7 +8,8 @@ const schema = new Schema({
     availableNotepads: [{type: Types.ObjectId, ref: "Notepad"}],
     photo: {type: String, required: true, default: "default.jpg"},
     description: {type: String, required: false},
-    company: {type: String, required: false}
+    company: {type: String, required: false},
+    themeName: {type: String, required: true, default: "none"}
 });
 
 module.exports = model('User', schema);

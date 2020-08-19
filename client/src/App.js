@@ -5,14 +5,21 @@ import { AuthContext } from './context/AuthContext';
 import { useAuth } from './hooks/useAuth.hook';
 import  {NavBar}  from './components/NavBar';
 import {ToastProvider} from 'react-toast-notifications';
-import { useHttp } from './hooks/http.hook';
+import Helement from 'react-helmet';
 
 function App() {
 
+  
   const {login, logout, token, userId} = useAuth();
   const isAuthenticated = !!token;
-
+  
   const routes = useRoutes(isAuthenticated);
+
+    useEffect(() => {
+      if(!isAuthenticated)
+        document.body.style.backgroundImage = "none";
+  
+    }, [isAuthenticated]);
 
   const setTheme = (theme) => {
     document.body.style.backgroundImage = 
@@ -21,6 +28,9 @@ function App() {
 
   return (
     <div className="container">
+      <Helement>
+        <title>To Records</title>
+      </Helement>
       <ToastProvider>
         <AuthContext.Provider value={{login, logout, token, userId, isAuthenticated}}>
           <BrowserRouter>

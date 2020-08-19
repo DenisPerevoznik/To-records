@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHttp } from '../hooks/http.hook';
 import { Link } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
+import { AuthContext } from '../context/AuthContext';
 
 export const Register = () => {
 
@@ -10,6 +11,7 @@ export const Register = () => {
         email: '', password: ''
     });
     const {addToast} = useToasts();
+    const auth = useContext(AuthContext);
 
     useEffect(() => {
        
@@ -31,6 +33,10 @@ export const Register = () => {
         try {
             const response = await request('/api/auth/register', "POST", {...form});
             addToast(response.message, {appearance: "success", autoDismiss: true});
+
+            // login
+            const loginData = await request('/api/auth/login', "POST", {...form});
+            auth.login(loginData.token, loginData.userId);
             
         } catch (error) {
         }
