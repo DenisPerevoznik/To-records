@@ -53,17 +53,18 @@ router.post('/save-profile', auth, async (req, res) => {
         
         const reqUser = req.body.user;
         const user = await User.findById(reqUser._id);
+        
+        for (const key in reqUser) {
+            user[key] = reqUser[key];
+        }
 
-        user.name = reqUser.name;
-        user.description = reqUser.description;
-        user.company = reqUser.company;
         await user.save();
 
         res.json({message: `${smile.generate("good")} User saved successfully`});
 
     } catch (error) {
-        // res.status(500).json({message: error.message});
-        res.status(500).json({message: "😥 Oops... something went wrong, try again"});
+        res.status(500).json({message: error.message});
+        // res.status(500).json({message: "😥 Oops... something went wrong, try again"});
     }
 });
 

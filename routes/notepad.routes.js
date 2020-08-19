@@ -140,10 +140,13 @@ router.post('/edit/:id', [
     }
 });
 
-router.get('/backgrounds', auth, async (req, res) => {
+router.get('/backgrounds/:imagesType', auth, async (req, res) => {
 
     try {
-        fs.readdir(config.get('imagesPath'), (err, files) => {
+
+        const imagesType = req.params.imagesType;
+
+        fs.readdir(config.get('imagesPath') + `/${imagesType}`, (err, files) => {
 
             if(err) {
                 return res.status(400).json({message: "Failed to load images"});

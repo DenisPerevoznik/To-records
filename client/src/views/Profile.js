@@ -80,7 +80,7 @@ export const Profile = () => {
   }
  
     return (
-    <div className="row p-5">
+    <div className="row p-5" style={{backgroundColor: "#ffffffc9"}}>
         {user ? <>
         <div className="col-md-3 d-flex justify-content-center">
             <div>

@@ -1,15 +1,17 @@
 import React, { useState, useContext, useEffect } from "react";
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
-MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBContainer, MDBIcon} from "mdbreact";
+MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBContainer, MDBIcon, MDBBadge} from "mdbreact";
 import { AuthContext } from "../context/AuthContext";
 import { useHistory, NavLink, Link } from "react-router-dom";
 import { useHttp } from "../hooks/http.hook";
+import {ChangeThemeModal} from './profile/ChangeThemeModal';
 
-export const NavBar = () => {
+export const NavBar = ({setTheme}) => {
 
 const auth = useContext(AuthContext)
 const [navToggle, setNavToggle] = useState(false);
 const [user, setUser] = useState(null);
+const [themeModalState, setThemeModalState] = useState(false);
 const {request} = useHttp();
 const history = useHistory();
 
@@ -27,6 +29,7 @@ const getUser = async () => {
             {Authorization: `Bearer ${auth.token}`});
 
         setUser(data.user);
+        setTheme(data.user.themeName);
     } catch (error) {}
 }
 
@@ -54,7 +57,7 @@ const navToggleHandler = () => {
             <MDBCollapse id="navbarCollapse3" isOpen={navToggle} navbar>
             <MDBNavbarNav left>
                 <MDBNavItem>
-                    <MDBNavLink to="/notepads">Notepads</MDBNavLink>
+                    <MDBNavLink to="/notepads">Notepads <MDBBadge color="danger" className="ml-2">4</MDBBadge></MDBNavLink>
                 </MDBNavItem>
                 <MDBNavItem>
                     <MDBNavLink to="/available">Available to me</MDBNavLink>
@@ -74,8 +77,6 @@ const navToggleHandler = () => {
                 <MDBDropdown>
                     <MDBDropdownToggle className="dopdown-toggle" style={{padding: "0.3rem 1rem"}} nav>
                     {user ?
-                    // <img src={`/${user.photo}`} className="rounded-circle z-depth-0"
-                    //     style={{ height: "35px", width: "35px" }} alt="" />
                     <div className="user-mini-photo" 
                         style={{backgroundImage: `url(/${user.photo})`}}></div>
                         :
@@ -84,6 +85,7 @@ const navToggleHandler = () => {
                     <MDBDropdownMenu className="dropdown-default custom-drop-menu" right>
 
                         <MDBDropdownItem><Link to="/profile"><i className="far fa-user-circle"/> My account</Link></MDBDropdownItem>
+                        <button className="dropdown-item" onClick={() => {setThemeModalState(true)}}><i className="fas fa-palette"/> Change theme</button>
                         <button className="dropdown-item" onClick={logoutHandler}><i className="fas fa-sign-out-alt"/> Log out</button>
 
                     </MDBDropdownMenu>
@@ -92,6 +94,9 @@ const navToggleHandler = () => {
             </MDBNavbarNav>
             </MDBCollapse>
         </MDBNavbar>
+
+        {user && <ChangeThemeModal onApply={() => {setThemeModalState(false)}} modalState={themeModalState}
+            onCancel={() => {setThemeModalState(false)}} user={user}/>}
         </MDBContainer>
     </div>
     );

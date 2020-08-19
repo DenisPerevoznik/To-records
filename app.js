@@ -21,7 +21,8 @@ if(process.env.NODE_ENV === "production"){
     });
 }
 
-mongo.connect(config.get('mongoUri'));
+mongo.connect(process.env.NODE_ENV === "production" ? config.get("mongoUriProduction")
+    : config.get('mongoUriDev'));
 
 // mongo.connection.on("connected", ()=>{
 //     console.log(colors.green("Подключение к базе данных установлено =)"));

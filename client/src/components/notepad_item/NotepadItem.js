@@ -116,9 +116,9 @@ export const NotepadItem = (props) => {
 
                 <div className="view view-cascade overlay" style={cascadeCardStyle}>
                     <img className="card-img-top" width="235" height="145" alt="not img" 
-                    src={require(`../../../resources/images/${form.image}`)}
+                    src={require(`../../resources/images/notepad-images/${form.image}`)}
                         alt="Card image cap"/>
-                    <Link to={`/home/notepad/${notepadItem._id}`}>
+                    <Link to={`/notepads/notepad/${notepadItem._id}`}>
                         <div className="mask rgba-white-slight"></div>
                     </Link>
                 </div>

@@ -1,4 +1,9 @@
 
+body{
+    background-size: cover;
+    background-attachment: fixed;
+}
+
 .selectImgBlock {
 
     height: 55px;

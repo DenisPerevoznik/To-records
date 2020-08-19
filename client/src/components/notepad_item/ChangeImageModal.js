@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
-import { SelectBackground } from './SelectBackground';
+import { SelectImage } from '../SelectImage';
 
 export const ChangeImageModal = ({changeImgMethod, currentImage}) => {
 
@@ -15,7 +15,7 @@ export const ChangeImageModal = ({changeImgMethod, currentImage}) => {
           <MDBModalHeader toggle={() => {setModalOpen(!modalOpen)}}>Change image</MDBModalHeader>
           <MDBModalBody>
 
-            <SelectBackground imageChange={changeImgMethod} selectedImage={currentImage} isFullScreen={true}/>
+            <SelectImage imagesType="notepad-images" imageChange={changeImgMethod} selectedImage={currentImage} isFullScreen={true}/>
 
           </MDBModalBody>
           <MDBModalFooter>

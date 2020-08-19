@@ -3,7 +3,7 @@ import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalF
 import { AuthContext } from '../../context/AuthContext';
 import { useToasts } from 'react-toast-notifications';
 import {useHttp} from '../../hooks/http.hook';
-import { SelectBackground } from './SelectBackground';
+import { SelectImage } from '../SelectImage';
 
 export const CreateNotepad = ({updateElementsMethod}) => {
 
@@ -55,7 +55,7 @@ export const CreateNotepad = ({updateElementsMethod}) => {
           <MDBModalBody>
 
             <label>Select image:</label>
-            <SelectBackground imageChange={imageChange}/>
+            <SelectImage imagesType="notepad-images" imageChange={imageChange}/>
 
             <MDBInput type="text" label="Notepad name" value={form.name} name="name" onChange={onChangeHandler}/>
             
