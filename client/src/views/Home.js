@@ -36,7 +36,7 @@ export const Home = () => {
     }
   }
     return (
-    <>
+    <div className="container">
       {loader &&
         <div className="d-flex justify-content-center align-items-center mt-4">
             <em style={{marginRight: "10px"}}>Loading... </em>
@@ -53,6 +53,6 @@ export const Home = () => {
         {notepads.map(notepadItem => <NotepadItem noEdit={false} key={notepadItem._id} notepadItem={notepadItem}
           updateElementsMethod={getNotepads}/>)}
       </div>
-      </>
+      </div>
     );
 }

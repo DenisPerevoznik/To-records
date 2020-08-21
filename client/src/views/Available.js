@@ -36,7 +36,7 @@ export const Available = () => {
     }
   }
     return (
-    <>
+    <div className="container">
       {loader &&
         <div className="d-flex justify-content-center align-items-center mt-4">
             <em style={{marginRight: "10px"}}>Loading... </em>
@@ -46,7 +46,7 @@ export const Available = () => {
 
         </div>}
 
-        <div className="row">
+        <div className="row header-item ml-3">
             <div className="col-12">
                 <h2>Available to me</h2>
             </div>
@@ -56,6 +56,6 @@ export const Available = () => {
             {notepads.map(notepadItem => <NotepadItem noEdit={true} key={notepadItem._id} notepadItem={notepadItem}
                 updateElementsMethod={getNotepads}/>)}
         </div>
-    </>
+    </div>
     );
 }

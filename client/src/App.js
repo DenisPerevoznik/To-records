@@ -27,7 +27,7 @@ function App() {
   }
 
   return (
-    <div className="container">
+    <>
       <Helement>
         <title>To Records</title>
       </Helement>
@@ -40,7 +40,7 @@ function App() {
           </BrowserRouter>
         </AuthContext.Provider>
       </ToastProvider>
-    </div>
+    </>
 );
 }
 

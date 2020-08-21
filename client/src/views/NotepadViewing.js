@@ -4,6 +4,7 @@ import { useHttp } from '../hooks/http.hook';
 import { useToasts } from 'react-toast-notifications';
 import { RecordItem } from '../components/record_item/RecordItem';
 import '../resources/css/notepad-viewing-styles.css';
+import { MDBTooltip } from 'mdbreact';
 
 export const NotepadViewing = (props) => {
 
@@ -16,22 +17,16 @@ export const NotepadViewing = (props) => {
     const [loader, setLoader] = useState(true);
     const [onlyFav, setOnlyFav] = useState(false);
 
+    const [temm, setTemm] = useState([]);
+
     useEffect(() => {
 
         loadNotepadData();
     }, []);
 
-    useEffect(() => {
-
-        if(onlyFav)
-            setRecords(records.filter(rec => rec.chosen == onlyFav));
-        else
-            loadNotepadData();
-    }, [onlyFav]);
-
     const loadNotepadData = async () => {
         try {
-            setLoader(true);
+            // setLoader(true);
             
             const notepad = await request(`/api/notepad/get/${params.notepadId}`, "GET", null, 
                 {Authorization: `Bearer ${auth.token}`});
@@ -78,66 +73,46 @@ export const NotepadViewing = (props) => {
         }
     }
 
-    const modifiedRecord = (modifiedrRecord) => {
+    const modifiedRecord = (modifiedRecord) => {
 
-        const modIndex = records.findIndex(rec => rec._id == modifiedrRecord._id);
-        const temp = records;
-        temp[modIndex] = modifiedrRecord;
-        setRecords(temp);
+        const modIndex = records.findIndex(rec => rec._id == modifiedRecord._id);
+        records[modIndex] = modifiedRecord;
+    }
+
+    const renderRecordItems = () => {
+
+        const tempArr = onlyFav ? records.filter(rec => rec.chosen) : records;
+
+        return (
+            <>
+            {tempArr.map(rec => <RecordItem key={rec._id} record={rec} notepadId={notepad._id}
+                onRemoveRecord={records => {setRecords(records)}} onModified={modifiedRecord} onlyFav={onlyFav}/>)}
+            </>
+        );
     }
 
     return (
+
+    <div className="container">
         <div className="pb-4">
 
-            <div className="row title-with-theme" style={{marginLeft: "1rem"}}>
+            <div className="row ml-3">
 
-                <div className="col-12" style={{color: "#53546a"}}>
-                    <h2><i className="fas fa-book"/> {notepad.name}</h2>
-                </div>
-            </div>
-
-            <div className="row">
-                <div className="col-md-3 col-sm-12">
-                    <button className="btn btn-dark" onClick={() => {setOnlyFav(!onlyFav)}}>
-                        {onlyFav && <i className="fas fa-check"/>} Only favorites</button>
-                </div>
-            </div>
-
-            {/* <div className="row d-flex justify-content-center pt-3">
-
-
-                <div className="col-md-3">
+                <div className="col-sm-12 col-md-3 mr-1 header-item" style={title}>
+                    <MDBTooltip domElement tag="span" placement="bottom" >
+                        <h2 className="short-text"><i className="fas fa-book"/> {notepad.name}</h2>
+                        <span>{notepad.name}</span>
+                    </MDBTooltip>
                     
-                    <div className="head-item">
-                        <i className="fas fa-book"/>
-                        <h3>{notepad.name}</h3>
-                    </div>
-
                 </div>
 
-                <div className="col-md-3">
-                    <div className="head-item">
-                        <i className="far fa-plus-square"/>
-                        <button className="btn btn-success" onClick={addNewRecord} style={{backgroundColor: "#46c261"}}>
-                            Create record</button>
+                <div className="col-md-3 col-sm-12">
+                    <div className="header-item">
+                        <button className="btn btn-dark" onClick={() => {setOnlyFav(!onlyFav)}}>
+                            {onlyFav && <i className="fas fa-check"/>} <i className="fas fa-heart"/> Only favorites</button>
                     </div>
                 </div>
-
-                <div className="col-md-3">
-                    <div className="head-item">
-                        <i className="fas fa-palette"/>
-                        <button className="btn btn-primary">Select theme</button>
-                    </div>
-                </div>
-
-                <div className="col-md-3 pl-0">
-                    <div className="head-item" style={{width: "100%"}}>
-                        <i className="fas fa-search" style={{marginLeft: "-16.2rem"}}/>
-                        <input onChange={searchHandler} className="form-control form-control-sm ml-3 w-100" 
-                                    type="text" placeholder="Search" aria-label="Search" />
-                    </div>
-                </div>
-            </div> */}
+            </div>
 
             <div className="row">
                 {loader &&
@@ -152,8 +127,7 @@ export const NotepadViewing = (props) => {
 
             
             <div className="row mt-4">
-                {records.map((rec, index) => <RecordItem key={rec._id} record={rec} notepadId={notepad._id}
-                    onRemoveRecord={records => {setRecords(records)}} onModified={modifiedRecord}/>)}
+                {renderRecordItems()}
 
                 <div className="col-sm-12 col-md-4 d-flex justify-content-center align-items-center">
                     <div className={`blockNewRecord`} title="Add new record" onClick={addNewRecord}>
@@ -165,5 +139,11 @@ export const NotepadViewing = (props) => {
             </div>
 
         </div>
+    </div>
     );
+}
+
+const title = {
+    border: "1px solid #dbdbdb",
+    color: "#444549"
 }

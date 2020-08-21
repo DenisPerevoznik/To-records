@@ -113,14 +113,15 @@ export const RecordItem = ({record, notepadId, onRemoveRecord, onModified}) => {
             addToast("💔 Record removed from favorites", {appearance: "info", autoDismiss: true});
         }
         
-        setRecordData({...recordData, chosen: !recordData.chosen});
-        onModified(recordData);
+        const newRecordData = {...recordData, chosen: !recordData.chosen};
+        setRecordData(newRecordData);
+        onModified(newRecordData);
     }
 
     return (
         <div className={`col-md-${recordData.width}`}>
 
-            <MDBCard style={{margin: "10px"}}>
+            <MDBCard style={{margin: "10px", border: "none"}}>
                 <MDBCardHeader style={{backgroundColor: recordData.color, 
                     color: colorWhiteText ? "white" : "black"}}
                         className="d-flex justify-content-between align-items-center">

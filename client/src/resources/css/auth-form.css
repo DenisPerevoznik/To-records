@@ -1,0 +1,57 @@
+
+
+.main-container{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(236, 237, 239);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
+
+.main-block{
+
+    min-width: 28rem;
+    box-shadow: 1px 2px 7px -2px black;
+}
+
+.auth-header{
+    background-image: url('https://zastavok.net/main/raznoe/157253652234.jpg');
+    background-position: center;
+    background-size: cover;
+    height: 8rem;
+    border-radius: 5px 5px 0 0;
+}
+
+.overlay{
+    border-radius: 5px 5px 0 0;
+    background-color: #677b8699;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+}
+
+.auth-body{
+    background-color: white;
+    padding: 30px;
+    border-radius: 0 0 5px 5px;
+}
+
+.btn-auth {
+    width: 8rem;
+    border-radius: 10rem;
+}
+
+@media (max-width: 375px){
+
+    .main-block{
+
+        min-width: auto;   
+    }
+}

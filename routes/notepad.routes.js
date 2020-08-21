@@ -10,7 +10,7 @@ const smiles = require('../custom_modules/SmileGenerator');
 
 // CREATE
 router.post('/create', [
-    check('name', "'Name' field, required to fillable").isString().not().isEmpty(),
+    check('name', "'Name' field, required to fillable").isString().not().isEmpty().isLength({max: 22}),
     check('description', "Description must not exceed 60 characters").isLength({max: 60}),
     auth
 ], async(req, res) => {
@@ -21,8 +21,7 @@ router.post('/create', [
 
         if(!errors.isEmpty()){
 
-            return res.status(400).json({errors: errors.array(), 
-                message: "🤔 Check the correctness of the entered data"});
+            return res.status(400).json({message: `${smiles.generate("bad")} ${errors.array()[0].msg}`});
         }
 
         const {image, name, description} = req.body;
@@ -107,6 +106,7 @@ router.delete('/remove/:id', auth, async (req, res) => {
 
 router.post('/edit/:id', [
     check('name', "'Name' field, required to fillable").isString().not().isEmpty(),
+    check('name', 'The maximum length of the "Name" field is 22 characters').isLength({max: 22}),
     check('description', "Description must not exceed 60 characters").isLength({max: 60}),
     auth], async (req, res) => {
 
@@ -115,7 +115,7 @@ router.post('/edit/:id', [
         const errors = validationResult(req);
 
         if(!errors.isEmpty()){
-            return res.status(400).json({message: "🤔 Check the correctness of the entered data"});
+            return res.status(400).json({message: `${smiles.generate("bad")} ${errors.array()[0].msg}`})
         }
 
         const {image, name, description} = req.body;
