@@ -104,7 +104,7 @@ export const NotepadItem = (props) => {
 
     return (
         
-        <div className="col-md-3 mt-5">
+        <div className="col-md-4 col-sm-12 col-lg-3 mt-5">
             <div className="card card-cascade narrower">
 
 

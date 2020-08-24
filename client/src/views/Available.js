@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { NotepadItem } from '../components/notepad_item/NotepadItem';
-import {CreateNotepad} from '../components/notepad_item/CreateNotepad'
 import { useHttp } from '../hooks/http.hook';
 import { AuthContext } from '../context/AuthContext';
 import { useToasts } from 'react-toast-notifications';

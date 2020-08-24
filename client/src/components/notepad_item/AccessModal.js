@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MDBModal, MDBModalHeader, MDBModalBody, MDBBtn, MDBNav, MDBNavItem, MDBNavLink, MDBIcon, MDBTabPane, MDBTabContent, MDBTable, MDBTableBody, MDBTableHead, MDBTableFoot } from 'mdbreact';
+import { MDBModal, MDBModalHeader, MDBModalBody, MDBBtn, MDBNav, MDBNavItem, MDBNavLink, MDBIcon, MDBTabPane, MDBTabContent, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import '../../resources/css/access-modal.css';
 import { useHttp } from '../../hooks/http.hook';
 import { useContext } from 'react';

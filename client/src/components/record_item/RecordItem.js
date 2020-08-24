@@ -119,7 +119,7 @@ export const RecordItem = ({record, notepadId, onRemoveRecord, onModified}) => {
     }
 
     return (
-        <div className={`col-md-${recordData.width}`}>
+        <div className={`col-lg-${recordData.width} col-md-6 col-sm-12`}>
 
             <MDBCard style={{margin: "10px", border: "none"}}>
                 <MDBCardHeader style={{backgroundColor: recordData.color, 

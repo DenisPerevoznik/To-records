@@ -17,8 +17,6 @@ export const NotepadViewing = (props) => {
     const [loader, setLoader] = useState(true);
     const [onlyFav, setOnlyFav] = useState(false);
 
-    const [temm, setTemm] = useState([]);
-
     useEffect(() => {
 
         loadNotepadData();
@@ -98,7 +96,7 @@ export const NotepadViewing = (props) => {
 
             <div className="row ml-3">
 
-                <div className="col-sm-12 col-md-3 mr-1 header-item" style={title}>
+                <div className="col-sm-12 col-md-4 col-lg-3 mr-1 header-item" style={title}>
                     <MDBTooltip domElement tag="span" placement="bottom" >
                         <h2 className="short-text"><i className="fas fa-book"/> {notepad.name}</h2>
                         <span>{notepad.name}</span>
@@ -106,7 +104,7 @@ export const NotepadViewing = (props) => {
                     
                 </div>
 
-                <div className="col-md-3 col-sm-12">
+                <div className="col-md-4 col-lg-3 col-sm-12">
                     <div className="header-item">
                         <button className="btn btn-dark" onClick={() => {setOnlyFav(!onlyFav)}}>
                             {onlyFav && <i className="fas fa-check"/>} <i className="fas fa-heart"/> Only favorites</button>
@@ -129,7 +127,7 @@ export const NotepadViewing = (props) => {
             <div className="row mt-4">
                 {renderRecordItems()}
 
-                <div className="col-sm-12 col-md-4 d-flex justify-content-center align-items-center">
+                <div className="col-sm-12 col-lg-4 col-md-6 d-flex justify-content-center align-items-center">
                     <div className={`blockNewRecord`} title="Add new record" onClick={addNewRecord}>
                         <i className="far fa-plus-square"/>
                         <h4 className="mb-0">New record</h4>

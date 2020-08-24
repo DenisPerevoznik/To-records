@@ -1,6 +1,6 @@
 
 import React, { useState} from 'react';
-import { MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
+import { MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 
